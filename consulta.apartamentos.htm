@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!-- Front-end de la 4ta Tarea Programada / Lenguajes de Programación I Semestre 2014 -->
+<html lang="en"> 
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Aplicación para Publicación y Búsqueda de Apartamentos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" media="screen"  />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}" media="screen"  />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" media="screen"  />
+    
+    <style type="text/css">
+	
+	
+
+      /* Estilos personalizados extra
+      -------------------------------------------------- */
+      
+	  html,
+      body {
+		background-image:url(../static/img/fondo.jpg);
+		background-position:initial;
+		background-repeat::no-repeat;
+	    height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      footer {
+            color: #666;
+            background: #222;
+            padding: 17px 0 18px 0;
+            border-top: 1px solid #000;
+			width:100%;
+        }
+        footer a {
+            color: #1d97cf;
+						
+        }
+        footer a:hover {
+            color: #efefef;
+			cursor: pointer;
+        }
+
+        /* Lastly, apply responsive CSS fixes as necessary */
+        @media (max-width: 767px) {
+        #footer {
+			margin-left: -20px;
+			margin-right: -20px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		}
+        
+		
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+      #wrap > .container {
+        padding-top: 60px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
+
+      code {
+        font-size: 80%;
+      }
+
+    </style>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" media="screen"/>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+
+</style></head>
+
+  <body>
+
+
+    <!-- Part 1: Wrap all page content here -->
+    <div id="wrap">
+
+            <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/inicio"><img style="max-width:40px; margin-top: -9px;" src="../static/img/House.jpg"> Encuentra tu Choza</a> 
+        </div>
+        <div class="navbar-collapse collapse" style="height: 1px;">
+          <ul class="nav navbar-nav">
+            <li><a href="/inicio"><span class="glyphicon glyphicon-home"></span>&nbsp;   Inicio</a></li>
+            <li class="dropdown active">
+                  <a href="ventana.inicio.htm#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span>&nbsp; Búsquedas<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/busquedas/apartamentos">Apartamentos</a></li>
+                   </ul>
+            </li><!-- /.dropdown -->
+            <li class="dropdown">
+                  <a href="ventana.inicio.htm#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book"></span>&nbsp; Publicación<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/publicacion/apartamentos">Apartamentos</a></li>
+                   </ul>
+            </li><!-- /.dropdown -->
+                
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+
+      <!-- Begin page content -->
+      <div class="container">
+        <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h1>Apartamentos</h1>
+        
+     <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" id="sectionMostrarTodos" href="#sectionTodos"><span title="Show all">Mostrar Todos</span></a></li>
+        <li><a data-toggle="tab" href="#sectionPrecio"><span title="By Price">Por Precio</span></a></li>
+        <li><a data-toggle="tab" href="#sectionCaractareristica"><span title="By Specific Characteristic">Por Características Especiales</span></a></li>
+        <li><a data-toggle="tab" href="#sectionUbicacion"><span title="By Location">Por Ubicación Geográfica</span></a></li>
+     </ul>
+        <p class="lead">
+        <div class="tab-content">
+        <div id="sectionTodos" class="tab-pane fade in active">
+        
+        <form class="horizontal" action="/resultado_consulta_todos" method="post">
+<fieldset>
+
+<!-- Form para Mostrar todos los apartamentos -->
+<p></p>
+<p>Búsqueda que muestra los datos de los apartamentos disponibles</p>
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-3 control-label" for="buttonTodos"></label>
+  <div class="col-md-3">
+    <button id="buttonTodos" name="buttonTodos" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-eye-open"></span> Mostrar</button>
+  </div>
+</div>
+
+
+</fieldset>
+</form>
+            
+        </div>
+        <div id="sectionPrecio" class="tab-pane fade">
+        
+        <form class="form-horizontal" action="/resultado_consulta_comida" method="post">
+<fieldset>
+
+<!-- Form para Filtrar los restaurantes por Tipo de comida -->
+<p></p>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="inputPrecio">Precio</label>  
+  <div class="col-md-5">
+  <input id="inputPrecio" name="inputPrecio" type="text" placeholder="Price" class="form-control input-md" required="">
+  <span class="help-block">Precio</span>  
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="buttonPrecio"></label>
+  <div class="col-md-4">
+    <button id="buttonPrecio" name="buttonPrecio" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+           
+            
+        </div>
+        
+        <div id="sectionCaractareristica" class="tab-pane fade">
+        
+        <form class="form-horizontal" action="/resultado_consulta_nombre"  method="post">
+<fieldset>
+
+<!-- Form para Filtrar los restaurantes por Característica -->
+<p></p>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="inputCaract">Caracteristica Deseada</label>  
+  <div class="col-md-5">
+  <input id="inputCaract" name="inputCaract" type="text" placeholder="Characteristic" class="form-control input-md" required="">
+  <span class="help-block">Característica Deseada</span>  
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="buttonCaracteristica"></label>
+  <div class="col-md-4">
+    <button id="buttonCaracteristica" name="buttonCaracteristica" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+           
+            
+        </div>
+        
+        <div id="sectionUbicacion" class="tab-pane fade">
+        
+        <form class="form-horizontal" action="/resultado_consulta_pais" method="post">
+<fieldset>
+
+<!-- Form para Filtrar los restaurantes por Ubicación -->
+<p></p>
+<p>Mostrar los Apartamentos que tengan la siguiente ubicación:</p>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="inputCaract">Ubicación Deseada</label>  
+  <div class="col-md-5">
+  <input id="inputUbicacion" name="inputUbicacion" type="text" placeholder="Location" class="form-control input-md" required="">
+  <span class="help-block">Ubicación Deseada</span>  
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="buttonUbicacion"></label>
+  <div class="col-md-4">
+    <button id="buttonUbicacion" name="buttonUbicacion" class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+           
+            
+        </div>
+        
+        </div>  <!-- Contenidos de las pestañas -->
+        
+        </p>
+        
+      </div>
+      </div>
+
+      <div id="push">
+      </div>
+    </div>
+
+
+    <footer>
+      <div class="container">
+        <p>@ITCR 2014 - Tarea Programada 4 .<a href="https://www.facebook.com/edgar.solorzanopacheco" rel="author"> Edgar Solórzano</a> - <a href="https://www.facebook.com/daniel.morachacon" rel="external">Daniel Mora</a> - <a href="https://www.facebook.com/geracaba" rel="external">Gerardo Calderón</a>.</p>
+      </div>
+    </footer>
+    
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+   
+        
+</body></html>
