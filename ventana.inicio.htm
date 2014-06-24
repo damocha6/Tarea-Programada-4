@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!-- Front-end de la 4ta Tarea Programada / Lenguajes de Programación I Semestre 2014 -->
+<html lang="en"> 
+
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Aplicación para Publicación y Búsqueda de Apartamentos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+    <!-- CSS  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" media="screen"  />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}" media="screen"  />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" media="screen"  />
+    
+    <style type="text/css">
+	
+	
+
+      /* Estilos personalizados extra
+      -------------------------------------------------- */
+      
+	  html,
+      body {
+		background-image:url(../static/img/fondo2.png);
+		background-position:initial;
+		background-repeat::no-repeat;
+	    height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      footer {
+            color: #666;
+            background: #222;
+            padding: 17px 0 18px 0;
+            border-top: 1px solid #000;
+			width:100%;
+        }
+        footer a {
+            color: #1d97cf;
+						
+        }
+        footer a:hover {
+            color: #efefef;
+			cursor: pointer;
+        }
+
+        /* Lastly, apply responsive CSS fixes as necessary */
+        @media (max-width: 767px) {
+        #footer {
+			margin-left: -20px;
+			margin-right: -20px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		}
+        
+		
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+      #wrap > .container {
+        padding-top: 60px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
+
+      code {
+        font-size: 80%;
+      }
+
+    </style>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" media="screen"/>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+    
+  
+
+</style></head>
+
+  <body>
+
+
+    <!-- Part 1: Wrap all page content here -->
+    <div id="wrap">
+
+      <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/inicio"><img style="max-width:40px; margin-top: -9px;" src="../static/img/House.jpg"> Encuentra tu Choza</a>
+        </div>
+        <div class="navbar-collapse collapse" style="height: 1px;">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/inicio"><span class="glyphicon glyphicon-home"></span>&nbsp;   Inicio</a></li>
+            <li class="dropdown">
+                  <a href="ventana.inicio.htm#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span>&nbsp; Búsquedas<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/busquedas/apartamentos">Apartamentos</a></li>
+                   </ul>
+            </li><!-- /.dropdown -->
+            <li class="dropdown">
+                  <a href="ventana.inicio.htm#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book"></span>&nbsp; Publicación<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/publicacion/apartamentos">Apartamentos</a></li>
+                   </ul>
+            </li><!-- /.dropdown -->
+                
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+
+
+      <!-- Begin page content -->
+      <div class="container">
+        <!-- Jumbotron -->
+      <div class="jumbotron">
+      <div id="myCarousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+    	
+       <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="active item">
+                <div class="carousel-caption">
+                  <h1>Encuentra tu Choza </h1>
+        <p class="lead">Busca los apartamentos más cercanos y disponibles alrededor del TEC!</p> 
+        
+        <p><a href="" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-lock"></span> Login</a></p>
+        <div class="logo">
+        <p><img style="max-width:100px; margin-top: -7px;" src="../static/img/House.jpg"></p></div>.
+                </div>
+            </div>
+            
+            <div class="item">
+              
+             <center><img src="../static/img/aparta.jpg" alt="Apartamentos" width="290" height="250"> </center>
+             <h3>Apartamentos</h3>  
+             
+            </div>
+            <div class="item">
+                
+                <center><img src="../static/img/TEC.jpg" alt="TEC" width="290" height="250"> </center>
+             <h3>Cerca del TEC</h3>  
+             
+            </div>
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+        
+      </div>
+      </div>
+
+      <div id="push">
+           <div class="container">
+           
+           </div>
+      </div>
+    </div>
+
+
+    <footer>
+      <div class="container">
+        <p>@ITCR 2014 - Tarea Programada 4 .<a href="https://www.facebook.com/edgar.solorzanopacheco" rel="author"> Edgar Solórzano</a> - <a href="https://www.facebook.com/daniel.morachacon" rel="external">Daniel Mora</a> - <a href="https://www.facebook.com/geracaba" rel="external">Gerardo Calderón</a>.</p>
+      </div>
+    </footer>
+    
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+        
+    
+</body></html>
